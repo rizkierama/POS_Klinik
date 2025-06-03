@@ -9,20 +9,15 @@ class ObatController extends Controller
 {
     public function index(Request $request)
     {
-        // Ambil jumlah data per halaman dari request (default: 10)
-        $perPage = $request->input('per_page', 10);
-        $search = $request->input('search');
+        $query = Obat::query();
 
-        // Query data dengan pencarian dan pagination
-        $query = Obat::orderBy('nama_obat', 'asc');
-
-        if ($search) {
-            $query->where('nama_obat', 'like', "%$search%");
+        if ($request->filled('search')) {
+            $query->where('nama_obat', 'like', '%' . $request->search . '%');
         }
-
-        $obats = $query->paginate($perPage)->appends(['search' => $search, 'per_page' => $perPage]);
-
-        return view('obat.index', compact('obats', 'search', 'perPage'));
+    
+        $obats = $query->orderBy('nama_obat')->paginate($request->per_page ?? 10);
+    
+        return view('obat.index', compact('obats'));
     }
 
     public function create()
@@ -61,9 +56,16 @@ class ObatController extends Controller
         return redirect()->route('obat.index')->with('success', 'Obat berhasil diperbarui.');
     }
 
-    public function updateStok()
+    public function updateStok(Request $request)
     {
-        $obats = Obat::all();
+        $query = Obat::query();
+
+        if ($request->filled('search')) {
+            $query->where('nama_obat', 'like', '%' . $request->search . '%');
+        }
+    
+        $obats = $query->orderBy('nama_obat')->get(); // ambil semua tanpa paginate
+        
         return view('obat.update-stok', compact('obats'));
     }
 

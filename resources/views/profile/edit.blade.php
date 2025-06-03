@@ -6,6 +6,12 @@
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     @include('profile.partials.update-profile-information-form')
+
+                    <div class="mt-4">
+                        <a href="{{ route('dashboard') }}" class="inline-block bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                            Kembali ke Dashboard
+                        </a>
+                    </div>
                 </div>
             </div>
 
