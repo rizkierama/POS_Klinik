@@ -22,7 +22,7 @@ Ini adalah proyek web berbasis Laravel. Proyek ini dibuat untuk Manajemen Obat.
 Ikuti langkah-langkah berikut setelah meng-clone repositori ini:
 
 ```bash
-git clone https://github.com/username/nama-proyek.git
+git clone https://github.com/rizkierama/POS_Klinik.git
 cd nama-proyek
 
 Install dependency PHP
